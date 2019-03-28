@@ -78,7 +78,7 @@
                 android:text="Espresso"
                 android:textAlignment="viewStart"
                 tools:layout_editor_absoluteX="37dp"
-                tools:layout_editor_absoluteY="125dp" />
+                tools:layout_editor_absoluteY="125dp"/>
 
             <TextView
                 android:id="@+id/coupon1_price"

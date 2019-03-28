@@ -55,6 +55,7 @@ public class Menu extends AppCompatActivity {
         userPoints = (TextView) findViewById(R.id.userPoints_textView);
 
         getUserPoints();
+        getUserEmail();
 
         requestPermission(); // get permission for location
 
