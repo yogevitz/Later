@@ -16,6 +16,8 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import java.util.Calendar;
+
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class Menu extends AppCompatActivity {
@@ -23,6 +25,7 @@ public class Menu extends AppCompatActivity {
     private Button startClock;
     private Button store;
     private Button flag;
+    private Button hourFlag;
     private TextView coordinates_TextView;
     private FusedLocationProviderClient client;
 
@@ -34,6 +37,7 @@ public class Menu extends AppCompatActivity {
         startClock = (Button) findViewById(R.id.getLocation_Btn);
         store = (Button) findViewById(R.id.store_Btn);
         flag = (Button) findViewById(R.id.inside_Btn);
+        hourFlag = (Button) findViewById(R.id.hour_Btn);
         coordinates_TextView = (TextView) findViewById(R.id.location_TextView);
 
         requestPermission();
@@ -50,11 +54,13 @@ public class Menu extends AppCompatActivity {
                     double Latitude = location.getLatitude();
                     double Longitude = location.getLongitude();
                     coordinates_TextView.setText(Latitude + " " + Longitude);
-                    if (availableCoordinates(Latitude, Longitude)) {
+                    if (availableCoordinates(Latitude, Longitude) && availablehours()) {
                         flag.setBackgroundColor(Color.GREEN);
+                        hourFlag.setBackgroundColor(Color.GREEN);
                         startClock.setEnabled(true);
-                    } else {
-                        flag.setBackgroundColor(Color.RED);
+                    }
+                    else {
+                        showAvalabilityIndication(Latitude, Longitude);
                     }
                 }
             }
@@ -99,6 +105,39 @@ public class Menu extends AppCompatActivity {
             return true;
         return false;
 
+    }
+    /**
+     *  check if hours is available
+     * @return true - available , false - not available
+     */
+    private boolean availablehours() {
+        Calendar rightNow = Calendar.getInstance();
+        int currentHourIn24Format = rightNow.get(Calendar.HOUR_OF_DAY);
+        if(currentHourIn24Format > 8 && currentHourIn24Format < 20)
+            return true;
+        return false;
+
+    }
+
+    /**
+     * Show user status indication
+     * why he is not available to use in app
+     * @param Latitude
+     * @param Longitude
+     */
+    private void showAvalabilityIndication(double Latitude, double Longitude){
+        if (availableCoordinates(Latitude, Longitude)){
+            flag.setBackgroundColor(Color.GREEN);
+            hourFlag.setBackgroundColor(Color.RED);
+        }
+        else if(availablehours()){
+            flag.setBackgroundColor(Color.RED);
+            hourFlag.setBackgroundColor(Color.GREEN);
+        }
+        else {
+            flag.setBackgroundColor(Color.RED);
+            hourFlag.setBackgroundColor(Color.RED);
+        }
     }
 
     /**

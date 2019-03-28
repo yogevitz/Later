@@ -240,7 +240,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-         //  int res = mDataBaseHelper.addUser(email,password); // 0 email exist, 1 problem to add , 2 success
+           //int res = mDataBaseHelper.addUser(email,password); // 0 email exist, 1 problem to add , 2 success
 
             Cursor c = mDataBaseHelper.getData();
            while( c.moveToNext())
