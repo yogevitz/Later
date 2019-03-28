@@ -103,8 +103,6 @@ public class Store extends AppCompatActivity {
         // more than the current number of points
         enableRelevantCoupons();
 
-
-
         coupon1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,11 +112,7 @@ public class Store extends AppCompatActivity {
                         .setPositiveButton("Use Coupon", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                points = points - coupon1_price;
-                                points_number.setText(points + "");
-                                updateInDB(- coupon1_price, userEmail);
-                                disableNotRelevantCoupons();
-                                enableRelevantCoupons();
+                                onClickUseCoupon(1);
                             }
                         })
                         .setNegativeButton("Cancel", null);
@@ -135,11 +129,7 @@ public class Store extends AppCompatActivity {
                         .setPositiveButton("Use Coupon", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                points = points - coupon2_price;
-                                points_number.setText(points + "");
-                                updateInDB(- coupon2_price, userEmail);
-                                disableNotRelevantCoupons();
-                                enableRelevantCoupons();
+                                onClickUseCoupon(2);
                             }
                         })
                         .setNegativeButton("Cancel", null);
@@ -156,11 +146,7 @@ public class Store extends AppCompatActivity {
                         .setPositiveButton("Use Coupon", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                points = points - coupon3_price;
-                                points_number.setText(points + "");
-                                updateInDB(- coupon3_price, userEmail);
-                                disableNotRelevantCoupons();
-                                enableRelevantCoupons();
+                                onClickUseCoupon(3);
                             }
                         })
                         .setNegativeButton("Cancel", null);
@@ -178,11 +164,7 @@ public class Store extends AppCompatActivity {
                         .setPositiveButton("Use Coupon", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                points = points - coupon4_price;
-                                points_number.setText(points + "");
-                                updateInDB(- coupon4_price, userEmail);
-                                disableNotRelevantCoupons();
-                                enableRelevantCoupons();
+                                onClickUseCoupon(4);
                             }
                         })
                         .setNegativeButton("Cancel", null);
@@ -199,11 +181,7 @@ public class Store extends AppCompatActivity {
                         .setPositiveButton("Use Coupon", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                points = points - coupon5_price;
-                                points_number.setText(points + "");
-                                updateInDB(- coupon5_price, userEmail);
-                                disableNotRelevantCoupons();
-                                enableRelevantCoupons();
+                                onClickUseCoupon(5);
                             }
                         })
                         .setNegativeButton("Cancel", null);
@@ -220,11 +198,7 @@ public class Store extends AppCompatActivity {
                         .setPositiveButton("Use Coupon", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                points = points - coupon6_price;
-                                points_number.setText(points + "");
-                                updateInDB(- coupon6_price, userEmail);
-                                disableNotRelevantCoupons();
-                                enableRelevantCoupons();
+                                onClickUseCoupon(6);
                             }
                         })
                         .setNegativeButton("Cancel", null);
@@ -232,6 +206,23 @@ public class Store extends AppCompatActivity {
                 alert.show();
             }
         });
+    }
+
+    public void onClickUseCoupon(int coupon_number) {
+        int current_price = 0;
+        switch (coupon_number) {
+            case 1: current_price = coupon1_price; break;
+            case 2: current_price = coupon2_price; break;
+            case 3: current_price = coupon3_price; break;
+            case 4: current_price = coupon4_price; break;
+            case 5: current_price = coupon5_price; break;
+            case 6: current_price = coupon6_price; break;
+        }
+        points = points - current_price;
+        points_number.setText(points + "");
+        updateInDB(- current_price, userEmail);
+        disableNotRelevantCoupons();
+        enableRelevantCoupons();
     }
 
     // Enable the relevant coupons

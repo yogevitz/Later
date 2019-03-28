@@ -239,9 +239,10 @@ public class Clock extends AppCompatActivity {
     private boolean availablehours() {
         Calendar rightNow = Calendar.getInstance();
         int currentHourIn24Format = rightNow.get(Calendar.HOUR_OF_DAY);
-        if(currentHourIn24Format > 8 && currentHourIn24Format < 20)
-            return true;
-        return false;
+//        if(currentHourIn24Format > 8 && currentHourIn24Format < 20)
+//            return true;
+//        return false;
+        return true;
 
     }
 
