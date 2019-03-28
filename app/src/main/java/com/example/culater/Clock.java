@@ -21,6 +21,8 @@ public class Clock extends AppCompatActivity {
     private TextView score;
     private int userScoreBeforeAdding;
     private int count;
+    private DataBaseHelper mDataBaseHelper ;
+    private String userEmail;
 
     private Thread t;
 
@@ -32,6 +34,8 @@ public class Clock extends AppCompatActivity {
         chronometer = findViewById(R.id.chronometer);
         score = findViewById(R.id.score_TextView);
         count = 0;
+        userEmail = getIntent().getStringExtra("EMAIL");
+        mDataBaseHelper = new DataBaseHelper(this);
 
 
         userScoreBeforeAdding = Integer.parseInt(getIntent().getStringExtra("USER_POINTS"));
@@ -101,8 +105,6 @@ public class Clock extends AppCompatActivity {
         System.out.println(elapsedMillis);
         point = elapsedMillis;
         score.setText("Point : "+point);
-
-
     }
 
     /**
@@ -110,8 +112,13 @@ public class Clock extends AppCompatActivity {
      * @param v
      */
     public void backToMenu(View v){
+        updateInDB();
         Intent intent = new Intent(this, Menu.class);
         intent.putExtra("POINTS_TO_ADD", (userScoreBeforeAdding+count)+"");
         startActivity(intent);
+    }
+
+    private void updateInDB() {
+        mDataBaseHelper.updatePoints(count,userEmail);
     }
 }

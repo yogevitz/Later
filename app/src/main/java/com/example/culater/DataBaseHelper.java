@@ -7,7 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.IntegerRes;
 
-public class DataBaseHelper extends SQLiteOpenHelper {
+import java.io.Serializable;
+
+
+public class DataBaseHelper extends SQLiteOpenHelper implements Serializable {
+
 
     private static final String TAG = "DataBaseHelper";
     private static final String TABEL_NAME = "Users";

@@ -405,7 +405,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public void openMenu(String userMail) {
         Intent intent = new Intent(this, Menu.class);
         String userPointsFromDB = mDataBaseHelper.getPoints(userMail)+"";
+        System.out.println("Points : "+userPointsFromDB);
         intent.putExtra("POINTS", userPointsFromDB);
+        intent.putExtra("EMAIL", userMail);
+
         startActivity(intent);
     }
 }

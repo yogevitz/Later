@@ -33,6 +33,7 @@ public class Menu extends AppCompatActivity {
     private FusedLocationProviderClient client;
 
     private String newPoints;
+    private String userEmail;
 
 
     @Override
@@ -100,16 +101,21 @@ public class Menu extends AppCompatActivity {
             newPoints = getIntent().getStringExtra("POINTS");
 
 
-        }else{
-            if(getIntent().getStringExtra("POINTS_TO_ADD") != null){
-                newPoints =  getIntent().getStringExtra("POINTS_TO_ADD");
-            }else {
+        }else {
+            if (getIntent().getStringExtra("POINTS_TO_ADD") != null) {
+                newPoints = getIntent().getStringExtra("POINTS_TO_ADD");
+            } else {
                 newPoints = "0";
             }
         }
 
-
         userPoints.setText("Points : " +newPoints);
+    }
+
+    private void getUserEmail(){
+        if (getIntent().getStringExtra("EMAIL") != null){
+            userEmail = getIntent().getStringExtra("EMAIL");
+        }
     }
 
 
@@ -164,6 +170,7 @@ public class Menu extends AppCompatActivity {
     public void openClock() {
         Intent intent = new Intent(this, Clock.class);
         intent.putExtra("USER_POINTS", newPoints);
+        intent.putExtra("EMAIL", userEmail);
         startActivity(intent);
     }
 
@@ -173,6 +180,7 @@ public class Menu extends AppCompatActivity {
     public void openStore() {
         Intent intent = new Intent(this, Store.class);
         intent.putExtra("POINTS", newPoints);
+        intent.putExtra("EMAIL", userEmail);
         startActivity(intent);
     }
 
