@@ -23,6 +23,9 @@ public class Store extends AppCompatActivity {
     private TextView coupon5_price_text;
     private TextView coupon6_price_text;
 
+    // Points label
+    private TextView points_number;
+
     // Coupon prices
     private int coupon1_price = 5;
     private int coupon2_price = 7;
@@ -32,12 +35,17 @@ public class Store extends AppCompatActivity {
     private int coupon6_price = 22;
 
     // Current number of points
-    private int points = 12;
+    private int points;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
+
+        // Set points label
+        points = Integer.parseInt(getIntent().getStringExtra("POINTS"));
+        points_number = (TextView) findViewById(R.id.points_number);
+        points_number.setText(points + "");
 
         // Coupons buttons
         coupon1 = (Button) findViewById(R.id.coupon1);
@@ -47,13 +55,21 @@ public class Store extends AppCompatActivity {
         coupon5 = (Button) findViewById(R.id.coupon5);
         coupon6 = (Button) findViewById(R.id.coupon6);
 
+        // Coupon prices
+        coupon1_price_text = (TextView) findViewById(R.id.coupon1_price);
+        coupon2_price_text = (TextView) findViewById(R.id.coupon2_price);
+        coupon3_price_text = (TextView) findViewById(R.id.coupon3_price);
+        coupon4_price_text = (TextView) findViewById(R.id.coupon4_price);
+        coupon5_price_text = (TextView) findViewById(R.id.coupon5_price);
+        coupon6_price_text = (TextView) findViewById(R.id.coupon6_price);
+
         // Set the prices of the coupons
-        coupon1_price_text.setText(coupon1_price);
-        coupon2_price_text.setText(coupon2_price);
-        coupon3_price_text.setText(coupon3_price);
-        coupon4_price_text.setText(coupon4_price);
-        coupon5_price_text.setText(coupon5_price);
-        coupon6_price_text.setText(coupon6_price);
+        coupon1_price_text.setText(coupon1_price + "");
+        coupon2_price_text.setText(coupon2_price + "");
+        coupon3_price_text.setText(coupon3_price + "");
+        coupon4_price_text.setText(coupon4_price + "");
+        coupon5_price_text.setText(coupon5_price + "");
+        coupon6_price_text.setText(coupon6_price + "");
 
         // Disable all coupons
         coupon1.setEnabled(false);

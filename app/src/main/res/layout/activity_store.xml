@@ -53,7 +53,7 @@
 
             <Button
                 android:id="@+id/coupon1"
-                android:layout_width="290dp"
+                android:layout_width="285dp"
                 android:layout_height="55dp"
                 android:text="Espresso"
                 android:textAlignment="viewStart"
@@ -64,7 +64,6 @@
                 android:id="@+id/coupon1_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5pt"
                 android:gravity="center"
                 android:text="5"
                 android:textSize="18sp"
@@ -78,7 +77,7 @@
 
             <Button
                 android:id="@+id/coupon2"
-                android:layout_width="290dp"
+                android:layout_width="285dp"
                 android:layout_height="55dp"
                 android:text="Americano"
                 android:textAlignment="viewStart"
@@ -91,7 +90,6 @@
                 android:layout_height="wrap_content"
                 android:text="5"
                 android:gravity="center"
-                android:layout_marginLeft="5pt"
                 android:textSize="18sp"
                 tools:text="7" />
 
@@ -104,7 +102,7 @@
 
             <Button
                 android:id="@+id/coupon3"
-                android:layout_width="290dp"
+                android:layout_width="285dp"
                 android:layout_height="55dp"
                 android:text="Latte"
                 android:textAlignment="viewStart"
@@ -117,7 +115,6 @@
                 android:layout_height="wrap_content"
                 android:text="5"
                 android:gravity="center"
-                android:layout_marginLeft="5pt"
                 android:textSize="18sp"
                 tools:text="10" />
 
@@ -130,7 +127,7 @@
 
             <Button
                 android:id="@+id/coupon4"
-                android:layout_width="290dp"
+                android:layout_width="285dp"
                 android:layout_height="55dp"
                 android:text="Coffee and Pastry"
                 android:textAlignment="viewStart"
@@ -143,7 +140,6 @@
                 android:layout_height="wrap_content"
                 android:text="5"
                 android:gravity="center"
-                android:layout_marginLeft="5pt"
                 android:textSize="18sp"
                 tools:text="15" />
 
@@ -156,7 +152,7 @@
 
             <Button
                 android:id="@+id/coupon5"
-                android:layout_width="290dp"
+                android:layout_width="285dp"
                 android:layout_height="55dp"
                 android:text="Chocolate"
                 android:textAlignment="viewStart"
@@ -169,7 +165,6 @@
                 android:layout_height="wrap_content"
                 android:text="5"
                 android:gravity="center"
-                android:layout_marginLeft="5pt"
                 android:textSize="18sp"
                 tools:text="17" />
 
@@ -182,7 +177,7 @@
 
             <Button
                 android:id="@+id/coupon6"
-                android:layout_width="290dp"
+                android:layout_width="285dp"
                 android:layout_height="55dp"
                 android:text="Sandwich"
                 android:textAlignment="viewStart"
@@ -195,7 +190,6 @@
                 android:layout_height="wrap_content"
                 android:text="5"
                 android:gravity="center"
-                android:layout_marginLeft="5pt"
                 android:textSize="18sp"
                 tools:text="22" />
 
