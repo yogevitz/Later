@@ -9,11 +9,13 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/inside_Btn"
@@ -24,14 +26,14 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/location_TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/textview" />
+                android:text="textview" />
         </TableRow>
 
         <TableRow
@@ -39,34 +41,43 @@
             android:layout_height="match_parent" >
 
             <Button
-                android:id="@+id/getLocation_Btn"
+                android:id="@+id/store_Btn"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:enabled="false"
-                android:text="@string/button" />
+                android:text="store"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="161dp"
+                tools:layout_editor_absoluteY="341dp" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/userPoints_textView"
+                android:layout_width="394dp"
+                android:layout_height="56dp"
+                android:text="textview"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="112dp"
+                tools:layout_editor_absoluteY="174dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/getLocation_Btn"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:text="clock" />
+        </TableRow>
+
     </TableLayout>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="187dp"
-        android:layout_height="56dp"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="112dp"
-        tools:layout_editor_absoluteY="174dp"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/store_Btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="341dp" />
 
 </android.support.constraint.ConstraintLayout>

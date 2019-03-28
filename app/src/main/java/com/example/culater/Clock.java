@@ -26,9 +26,9 @@ public class Clock extends AppCompatActivity {
 
         chronometer = findViewById(R.id.chronometer);
         score = findViewById(R.id.score_TextView);
-        Thread t = new Thread(()->startClock());
-        t.start();
-
+        //Thread t = new Thread(()->startClock());
+        //t.start();
+        startClock();
         for(int i=0 ;i <10;i++)
             System.out.println("Dor");
     }
@@ -74,6 +74,7 @@ public class Clock extends AppCompatActivity {
      */
     public void backToMenu(View v){
         Intent intent = new Intent(this, Menu.class);
+        intent.putExtra("POINTS", point);
         startActivity(intent);
     }
 }
