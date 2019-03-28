@@ -24,6 +24,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/cast_abc_scrubber_control_off_mtrl_alpha" />
+            <Button
+                android:id="@+id/hour_Btn"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/cast_abc_scrubber_control_off_mtrl_alpha" />
         </TableRow>
 
         <TableRow

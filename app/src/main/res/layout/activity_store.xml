@@ -7,10 +7,200 @@
     tools:context=".Store">
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="160dp"
-        tools:layout_editor_absoluteY="187dp" />
+        android:id="@+id/points_label"
+        android:layout_width="45dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Points:"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintEnd_toStartOf="@+id/points_number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/points_number"
+        android:layout_width="0dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="181dp"
+        android:text="12"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/points_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/points_label" />
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingLeft="30dp"
+        android:paddingTop="0dp"
+        android:paddingRight="30dp"
+        app:layout_constrainedHeight="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/points_label">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:gravity="center">
+
+
+            <Button
+                android:id="@+id/coupon1"
+                android:layout_width="290dp"
+                android:layout_height="55dp"
+                android:text="Espresso"
+                android:textAlignment="viewStart"
+                tools:layout_editor_absoluteX="37dp"
+                tools:layout_editor_absoluteY="125dp" />
+
+            <TextView
+                android:id="@+id/coupon1_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5pt"
+                android:gravity="center"
+                android:text="5"
+                android:textSize="18sp"
+                tools:text="5" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/coupon2"
+                android:layout_width="290dp"
+                android:layout_height="55dp"
+                android:text="Americano"
+                android:textAlignment="viewStart"
+                tools:layout_editor_absoluteX="37dp"
+                tools:layout_editor_absoluteY="203dp" />
+
+            <TextView
+                android:id="@+id/coupon2_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:gravity="center"
+                android:layout_marginLeft="5pt"
+                android:textSize="18sp"
+                tools:text="7" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/coupon3"
+                android:layout_width="290dp"
+                android:layout_height="55dp"
+                android:text="Latte"
+                android:textAlignment="viewStart"
+                tools:layout_editor_absoluteX="37dp"
+                tools:layout_editor_absoluteY="286dp" />
+
+            <TextView
+                android:id="@+id/coupon3_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:gravity="center"
+                android:layout_marginLeft="5pt"
+                android:textSize="18sp"
+                tools:text="10" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/coupon4"
+                android:layout_width="290dp"
+                android:layout_height="55dp"
+                android:text="Coffee and Pastry"
+                android:textAlignment="viewStart"
+                tools:layout_editor_absoluteX="37dp"
+                tools:layout_editor_absoluteY="286dp" />
+
+            <TextView
+                android:id="@+id/coupon4_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:gravity="center"
+                android:layout_marginLeft="5pt"
+                android:textSize="18sp"
+                tools:text="15" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/coupon5"
+                android:layout_width="290dp"
+                android:layout_height="55dp"
+                android:text="Chocolate"
+                android:textAlignment="viewStart"
+                tools:layout_editor_absoluteX="37dp"
+                tools:layout_editor_absoluteY="286dp" />
+
+            <TextView
+                android:id="@+id/coupon5_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:gravity="center"
+                android:layout_marginLeft="5pt"
+                android:textSize="18sp"
+                tools:text="17" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/coupon6"
+                android:layout_width="290dp"
+                android:layout_height="55dp"
+                android:text="Sandwich"
+                android:textAlignment="viewStart"
+                tools:layout_editor_absoluteX="37dp"
+                tools:layout_editor_absoluteY="286dp" />
+
+            <TextView
+                android:id="@+id/coupon6_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:gravity="center"
+                android:layout_marginLeft="5pt"
+                android:textSize="18sp"
+                tools:text="22" />
+
+        </TableRow>
+
+    </TableLayout>
+
 </android.support.constraint.ConstraintLayout>
