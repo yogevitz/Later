@@ -1,9 +1,9 @@
 package com.example.culater;
 
+
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.Properties;
+
 
 public class Clock extends AppCompatActivity {
 
@@ -29,8 +29,6 @@ public class Clock extends AppCompatActivity {
     private Thread t;
     private Thread tHours;
     private Thread tIdle;
-
-//    private Thread tCoordinates;
     private Button backButton;
 
     @Override
@@ -52,14 +50,9 @@ public class Clock extends AppCompatActivity {
         t.start();
         startCheckHours();
         tHours.start();
-//        startCheckCoordinates();
-//        tCoordinates.start();
         startCheckidle();
         tIdle.start();
 
-
-        //Thread t = new Thread(()->startClock());
-        //t.start();
 
         for(int i=0 ;i <10;i++)
             System.out.println("Dor");
@@ -169,6 +162,7 @@ public class Clock extends AppCompatActivity {
         };
 
     }
+
     /**
      * Separated thread that checking the idle
      */
@@ -201,37 +195,6 @@ public class Clock extends AppCompatActivity {
 
     }
 
-//    /**
-//     * Separated thread that checking the Coordinates
-//     */
-//    private void startCheckCoordinates(){
-//
-//        tCoordinates = new Thread(){
-//
-//            public void run(){
-//                while(!isInterrupted()){
-//                    try{
-//                        Thread.sleep(1000);
-//
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                if(!availablehours()){
-//                                    backButton.setClickable(true);
-//                                }
-//                                else
-//                                    System.out.println("itay");
-//                            }
-//                        });
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        };
-//
-//    }
-
     /**
      *  check if hours is available
      * @return true - available , false - not available
@@ -246,20 +209,4 @@ public class Clock extends AppCompatActivity {
 
     }
 
-//    /**
-//     *  check if Coordinates is inside in the university
-//     *  get university coordinates from google
-//     * @param latit
-//     * @param longit
-//     * @return true - inside , false - outside
-//     */
-//    private boolean availableCoordinates(double latit, double longit) {
-//        double North = 31.264972441750654; // latitude
-//        double South = 31.260913230180165; // latitude
-//        double East = 34.80587469500858; // longitude
-//        double West = 34.798327688240306; // longitude
-//
-//        return North > latit && South < latit && East > longit && West < longit;
-//
-//    }
 }

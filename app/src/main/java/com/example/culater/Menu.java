@@ -4,8 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Handler;
@@ -78,8 +76,6 @@ public class Menu extends AppCompatActivity {
                         flag.setBackgroundColor(Color.GREEN);
                         hourFlag.setBackgroundColor(Color.GREEN);
                         startClock.setEnabled(true);
-//                        startCheckHours();
-//                        tHours.start();
                     }
                     else {
                         showAvalabilityIndication(Latitude, Longitude);
@@ -87,37 +83,35 @@ public class Menu extends AppCompatActivity {
                 }
             }
         });
-//        Handler handler = new Handler();
-//        int delay = 10000; //milliseconds
-//        handler.postDelayed(new Runnable(){
-//            public void run(){
-//                requestPermission();
-//
-//                client = LocationServices.getFusedLocationProviderClient(a);
-//                if (ActivityCompat.checkSelfPermission(Menu.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                    return;
-//                }
-//                client.getLastLocation().addOnSuccessListener(Menu.this, new OnSuccessListener<Location>() {
-//                    @Override
-//                    public void onSuccess(Location location) {
-//                        if (location != null) {
-//                            double Latitude = location.getLatitude();
-//                            double Longitude = location.getLongitude();
-//                            System.out.println(Latitude);
-//                            System.out.println(Longitude);
-//                            coordinates_TextView.setText(Latitude + " " + Longitude);
-//                            if (availableCoordinates(Latitude, Longitude)) {
-//                                flag.setBackgroundColor(Color.GREEN);
-//                                startClock.setEnabled(true);
-//                            } else {
-//                                flag.setBackgroundColor(Color.RED);
-//                            }
-//                        }
-//                    }
-//                });
-//                handler.postDelayed(this, delay);
-//            }
-//        }, delay);
+        Handler handler = new Handler();
+        int delay = 10000; //milliseconds
+        handler.postDelayed(new Runnable(){
+            public void run(){
+                if (ActivityCompat.checkSelfPermission(Menu.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                  return;
+                }
+                client.getLastLocation().addOnSuccessListener(Menu.this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        if (location != null) {
+                            double Latitude = location.getLatitude();
+                            double Longitude = location.getLongitude();
+                            System.out.println("Latitude,first: " + Latitude);
+                            coordinates_TextView.setText(Latitude + " " + Longitude);
+                            if (availableCoordinates(Latitude, Longitude) && availablehours()) {
+                                flag.setBackgroundColor(Color.GREEN);
+                                hourFlag.setBackgroundColor(Color.GREEN);
+                                startClock.setEnabled(true);
+                            }
+                            else {
+                                showAvalabilityIndication(Latitude, Longitude);
+                            }
+                        }
+                    }
+                });
+                handler.postDelayed(this, delay);
+            }
+        }, delay);
         // move to clock class
         startClock.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -224,10 +218,9 @@ public class Menu extends AppCompatActivity {
     private boolean availablehours() {
         Calendar rightNow = Calendar.getInstance();
         int currentHourIn24Format = rightNow.get(Calendar.HOUR_OF_DAY);
-//        if(currentHourIn24Format > 8 && currentHourIn24Format < 20)
-//            return true;
-//        return false;
-        return true;
+        if(currentHourIn24Format > 8 && currentHourIn24Format < 23)
+            return true;
+        return false;
     }
 
 //    /**
