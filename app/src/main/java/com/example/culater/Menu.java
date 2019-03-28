@@ -1,12 +1,14 @@
 package com.example.culater;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.location.Location;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +35,9 @@ public class Menu extends AppCompatActivity {
     private FusedLocationProviderClient client;
 
     private String newPoints;
+    private Activity a = this;
+//    private Thread tHours;
+
 
 
     @Override
@@ -68,6 +73,8 @@ public class Menu extends AppCompatActivity {
                         flag.setBackgroundColor(Color.GREEN);
                         hourFlag.setBackgroundColor(Color.GREEN);
                         startClock.setEnabled(true);
+//                        startCheckHours();
+//                        tHours.start();
                     }
                     else {
                         showAvalabilityIndication(Latitude, Longitude);
@@ -75,6 +82,37 @@ public class Menu extends AppCompatActivity {
                 }
             }
         });
+//        Handler handler = new Handler();
+//        int delay = 10000; //milliseconds
+//        handler.postDelayed(new Runnable(){
+//            public void run(){
+//                requestPermission();
+//
+//                client = LocationServices.getFusedLocationProviderClient(a);
+//                if (ActivityCompat.checkSelfPermission(Menu.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                    return;
+//                }
+//                client.getLastLocation().addOnSuccessListener(Menu.this, new OnSuccessListener<Location>() {
+//                    @Override
+//                    public void onSuccess(Location location) {
+//                        if (location != null) {
+//                            double Latitude = location.getLatitude();
+//                            double Longitude = location.getLongitude();
+//                            System.out.println(Latitude);
+//                            System.out.println(Longitude);
+//                            coordinates_TextView.setText(Latitude + " " + Longitude);
+//                            if (availableCoordinates(Latitude, Longitude)) {
+//                                flag.setBackgroundColor(Color.GREEN);
+//                                startClock.setEnabled(true);
+//                            } else {
+//                                flag.setBackgroundColor(Color.RED);
+//                            }
+//                        }
+//                    }
+//                });
+//                handler.postDelayed(this, delay);
+//            }
+//        }, delay);
         // move to clock class
         startClock.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,4 +227,33 @@ public class Menu extends AppCompatActivity {
         return false;
 
     }
+
+//    /**
+//     * Separated thread that checking the hours
+//     */
+//    private void startCheckHours(){
+//
+//        tHours = new Thread(){
+//
+//            public void run(){
+//                while(availablehours()){
+//                    try{
+//                        Thread.sleep(1000);
+//
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//
+//                            }
+//                        });
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                        startClock.setEnabled(false);
+//
+//                    }
+//                }
+//            }
+//        };
+//
+//    }
 }
