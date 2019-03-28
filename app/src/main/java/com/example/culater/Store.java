@@ -7,6 +7,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -102,6 +103,8 @@ public class Store extends AppCompatActivity {
         // more than the current number of points
         enableRelevantCoupons();
 
+
+
         coupon1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +116,7 @@ public class Store extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 points = points - coupon1_price;
                                 points_number.setText(points + "");
-                                updateInDB(points, userEmail);
+                                updateInDB(- coupon1_price, userEmail);
                                 disableNotRelevantCoupons();
                                 enableRelevantCoupons();
                             }
@@ -134,7 +137,7 @@ public class Store extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 points = points - coupon2_price;
                                 points_number.setText(points + "");
-                                updateInDB(points, userEmail);
+                                updateInDB(- coupon2_price, userEmail);
                                 disableNotRelevantCoupons();
                                 enableRelevantCoupons();
                             }
@@ -155,7 +158,7 @@ public class Store extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 points = points - coupon3_price;
                                 points_number.setText(points + "");
-                                updateInDB(points, userEmail);
+                                updateInDB(- coupon3_price, userEmail);
                                 disableNotRelevantCoupons();
                                 enableRelevantCoupons();
                             }
@@ -177,7 +180,7 @@ public class Store extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 points = points - coupon4_price;
                                 points_number.setText(points + "");
-                                updateInDB(points, userEmail);
+                                updateInDB(- coupon4_price, userEmail);
                                 disableNotRelevantCoupons();
                                 enableRelevantCoupons();
                             }
@@ -198,7 +201,7 @@ public class Store extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 points = points - coupon5_price;
                                 points_number.setText(points + "");
-                                updateInDB(points, userEmail);
+                                updateInDB(- coupon5_price, userEmail);
                                 disableNotRelevantCoupons();
                                 enableRelevantCoupons();
                             }
@@ -219,7 +222,7 @@ public class Store extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 points = points - coupon6_price;
                                 points_number.setText(points + "");
-                                updateInDB(points, userEmail);
+                                updateInDB(- coupon6_price, userEmail);
                                 disableNotRelevantCoupons();
                                 enableRelevantCoupons();
                             }
@@ -266,6 +269,16 @@ public class Store extends AppCompatActivity {
     // Update points in DB
     private void updateInDB(int count, String userEmail) {
         mDataBaseHelper.updatePoints(count, userEmail);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Intent intent = new Intent(this, Menu.class);
+            intent.putExtra("EMAIL", (userEmail));
+            startActivity(intent);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 }

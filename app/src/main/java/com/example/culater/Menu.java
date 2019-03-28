@@ -33,6 +33,7 @@ public class Menu extends AppCompatActivity {
     private TextView coordinates_TextView;
     private TextView userPoints;
     private FusedLocationProviderClient client;
+    private DataBaseHelper mDataBaseHelper ;
 
     private String newPoints;
     private Activity a = this;
@@ -53,9 +54,11 @@ public class Menu extends AppCompatActivity {
         hourFlag = (Button) findViewById(R.id.hour_Btn);
         coordinates_TextView = (TextView) findViewById(R.id.location_TextView);
         userPoints = (TextView) findViewById(R.id.userPoints_textView);
+        mDataBaseHelper = new DataBaseHelper(this);
 
-        getUserPoints();
         getUserEmail();
+        getUserPoints();
+
 
         requestPermission(); // get permission for location
 
@@ -136,19 +139,8 @@ public class Menu extends AppCompatActivity {
      * get point to add to user from clock
      */
     private void getUserPoints() {
-        if(getIntent().getStringExtra("POINTS") != null){
-            newPoints = getIntent().getStringExtra("POINTS");
 
-
-        }else{
-            if(getIntent().getStringExtra("POINTS_TO_ADD") != null){
-                newPoints =  getIntent().getStringExtra("POINTS_TO_ADD");
-            }else {
-                newPoints = "0";
-            }
-        }
-
-
+        newPoints = mDataBaseHelper.getPoints(userEmail)+"";
         userPoints.setText("Points : " +newPoints);
     }
 
