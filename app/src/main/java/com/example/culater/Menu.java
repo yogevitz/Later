@@ -34,9 +34,6 @@ public class Menu extends AppCompatActivity {
     private DataBaseHelper mDataBaseHelper ;
 
     private String newPoints;
-    private Activity a = this;
-//    private Thread tHours;
-
     private String userEmail;
 
 
@@ -222,33 +219,4 @@ public class Menu extends AppCompatActivity {
             return true;
         return false;
     }
-
-//    /**
-//     * Separated thread that checking the hours
-//     */
-//    private void startCheckHours(){
-//
-//        tHours = new Thread(){
-//
-//            public void run(){
-//                while(availablehours()){
-//                    try{
-//                        Thread.sleep(1000);
-//
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//
-//                            }
-//                        });
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                        startClock.setEnabled(false);
-//
-//                    }
-//                }
-//            }
-//        };
-//
-//    }
 }
