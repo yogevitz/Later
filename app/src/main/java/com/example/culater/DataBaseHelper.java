@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.IntegerRes;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
@@ -91,15 +92,36 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return db.rawQuery(query,null);
     }
 
-    public void updatePoints(int points){
+    public void updatePoints(int points, String email){
         try{
             SQLiteDatabase db = this.getWritableDatabase();
-            String rawQuery = "UPDATE "+TABEL_NAME+" set "+COL_1_3+ "="+points;
-            db.rawQuery(rawQuery, null);
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(COL_1_1,email);
+
+            // get current points and add new points
+            Cursor c1 = getData();
+            while( c1.moveToNext()) {
+                if (c1.getString(0).equals(email)){
+                    points += Integer.parseInt(c1.getString(2));
+                    break;
+                    }
+            }
+
+            System.out.println(points +"          sdssdsdsddsdsdssdssddssdsdsdsdsdsdsddsdssdsd");
+
+            String rawQuery = "UPDATE "+TABEL_NAME+" set "+COL_1_3+ "="+points+" WHERE "+COL_1_1+"="+"'"+email+"'";
+            db.execSQL(rawQuery);
+
+
+
+            /*
+            String rawQuery = "UPDATE "+TABEL_NAME+" set "+COL_1_3+ "="+points+" WHERE "+COL_1_1+"="+"'"+email+"'";
+            db.rawQuery(rawQuery, COL_1_1,);*/
         }
         catch(Exception ex)
         {
             ex.printStackTrace();
         }
+
     }
 }

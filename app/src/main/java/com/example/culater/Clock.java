@@ -29,23 +29,8 @@ public class Clock extends AppCompatActivity {
         Thread t = new Thread(()->startClock());
         t.start();
 
-
         for(int i=0 ;i <10;i++)
             System.out.println("Dor");
-        //int x = idle();
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     private void startClock() {

@@ -240,16 +240,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-          //  int res = mDataBaseHelper.addUser(email,password); // 0 email exist, 1 problem to add , 2 success
+         //  int res = mDataBaseHelper.addUser(email,password); // 0 email exist, 1 problem to add , 2 success
 
             Cursor c = mDataBaseHelper.getData();
            while( c.moveToNext())
                 System.out.println(c.getString(0) +","+c.getString(1) +","+c.getString(2));
-            if(mDataBaseHelper.checkEmailAndPassword(email,password)) {
+           if(mDataBaseHelper.checkEmailAndPassword(email,password)) {
                 showProgress(true);
                 mAuthTask = new UserLoginTask(email, password);
                 mAuthTask.execute((Void) null);
-                mDataBaseHelper.updatePoints(10);
+                mDataBaseHelper.updatePoints(10, email);
+                Cursor c1 = mDataBaseHelper.getData();
+                while( c1.moveToNext())
+                    System.out.println(c1.getString(0) +","+c1.getString(1) +","+c1.getString(2));
             }
             else {
                 mPasswordView.setError("The email/password are not valid");
@@ -258,6 +261,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             Cursor c1 = mDataBaseHelper.getData();
             while( c1.moveToNext())
                 System.out.println(c1.getString(0) +","+c1.getString(1) +","+c1.getString(2));
+
         }
     }
 
