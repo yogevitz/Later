@@ -14,4 +14,6 @@
     </string>
     <string name="textview">TextView</string>
     <string name="button">Button</string>
+    <string name="store">Store</string>
+    <string name="clock">Clock</string>
 </resources>
