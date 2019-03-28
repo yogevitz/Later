@@ -20,6 +20,9 @@ public class Clock extends AppCompatActivity {
     private int point;
     private TextView score;
     private int userScoreBeforeAdding;
+    private int count;
+
+    private Thread t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +31,14 @@ public class Clock extends AppCompatActivity {
 
         chronometer = findViewById(R.id.chronometer);
         score = findViewById(R.id.score_TextView);
+        count = 0;
 
 
         userScoreBeforeAdding = Integer.parseInt(getIntent().getStringExtra("USER_POINTS"));
 
         startClock();
+        startTimer();
+        t.start();
 
 
         //Thread t = new Thread(()->startClock());
@@ -48,6 +54,27 @@ public class Clock extends AppCompatActivity {
     }
 
     private void startTimer(){
+
+        t = new Thread(){
+
+            public void run(){
+                while(!isInterrupted()){
+                    try{
+                        Thread.sleep(1000);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                count++;
+                                score.setText("Point : "+String.valueOf(count));
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
 
     }
 
@@ -84,7 +111,7 @@ public class Clock extends AppCompatActivity {
      */
     public void backToMenu(View v){
         Intent intent = new Intent(this, Menu.class);
-        intent.putExtra("POINTS_TO_ADD", (userScoreBeforeAdding+point)+"");
+        intent.putExtra("POINTS_TO_ADD", (userScoreBeforeAdding+count)+"");
         startActivity(intent);
     }
 }
