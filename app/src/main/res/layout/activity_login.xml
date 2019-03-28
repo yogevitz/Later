@@ -12,17 +12,6 @@
     tools:context=".LoginActivity">
 
     <!-- Login progress -->
-    <TextView
-        android:id="@+id/loaction_TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
-    <Button
-        android:id="@+id/getLoaction_Btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
 
     <ProgressBar
         android:id="@+id/login_progress"

@@ -3,6 +3,7 @@ package com.example.culater;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,20 +29,25 @@ public class Clock extends AppCompatActivity {
         chronometer = findViewById(R.id.chronometer);
         score = findViewById(R.id.score_TextView);
 
+
         userScoreBeforeAdding = Integer.parseInt(getIntent().getStringExtra("USER_POINTS"));
+
+        startClock();
+
 
         //Thread t = new Thread(()->startClock());
         //t.start();
-        startClock();
+
         for(int i=0 ;i <10;i++)
             System.out.println("Dor");
     }
 
     private void startClock() {
         chronometer.start();
-        for(int i=0;i<10;i++) {
-            System.out.println("ITAY");
-        }
+
+    }
+
+    private void startTimer(){
 
     }
 

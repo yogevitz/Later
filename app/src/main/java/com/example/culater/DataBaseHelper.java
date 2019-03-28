@@ -92,6 +92,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return db.rawQuery(query,null);
     }
 
+    /**
+     * get points by given email
+     * @param email
+     * @return
+     */
+    public int getPoints(String email) {
+        Cursor c1 = getData();
+        while (c1.moveToNext()) {
+            if (c1.getString(0).equals(email)) {
+                return c1.getInt(2);
+            }
+        }
+        return -1;
+    }
+
     public void updatePoints(int points, String email){
         try{
             SQLiteDatabase db = this.getWritableDatabase();
@@ -124,4 +139,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
 
     }
+
+
 }

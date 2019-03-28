@@ -91,31 +91,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         //db creation
         mDataBaseHelper = new DataBaseHelper(this);
 
-        // set up Location
-        button = (Button) findViewById(R.id.getLoaction_Btn);
-        textView = (TextView) findViewById(R.id.loaction_TextView);
-
         requestPermission();
 
         client = LocationServices.getFusedLocationProviderClient(this);
-        button.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (ActivityCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
-
-                    return;
-                }
-                client.getLastLocation().addOnSuccessListener(LoginActivity.this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        if(location!= null){
-                            textView.setText(location.toString());
-                        }
-                    }
-                });
-            }
-        });
 
 
         // Set up the login form.
@@ -409,7 +387,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 //finish();
-                openMenu();
+                openMenu(mEmail);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
@@ -424,9 +402,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
 
-    public void openMenu() {
+    public void openMenu(String userMail) {
         Intent intent = new Intent(this, Menu.class);
-        intent.putExtra("POINTS", "2");
+        String userPointsFromDB = mDataBaseHelper.getPoints(userMail)+"";
+        intent.putExtra("POINTS", userPointsFromDB);
         startActivity(intent);
     }
 }
