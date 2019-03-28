@@ -3,6 +3,8 @@ package com.example.culater;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
@@ -22,21 +24,29 @@ public class Menu extends AppCompatActivity {
 
     private Button startClock;
     private Button store;
-    private Button flag;
+    private Button flag; // red : outside, green : inside
     private TextView coordinates_TextView;
+    private TextView userPoints;
     private FusedLocationProviderClient client;
+
+    private String newPoints;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        // initialize
         startClock = (Button) findViewById(R.id.getLocation_Btn);
         store = (Button) findViewById(R.id.store_Btn);
         flag = (Button) findViewById(R.id.inside_Btn);
         coordinates_TextView = (TextView) findViewById(R.id.location_TextView);
+        userPoints = (TextView) findViewById(R.id.userPoints_textView);
 
-        requestPermission();
+        getUserPoints();
+
+        requestPermission(); // get permission for location
 
         client = LocationServices.getFusedLocationProviderClient(this);
 
@@ -59,14 +69,14 @@ public class Menu extends AppCompatActivity {
                 }
             }
         });
-
+        // move to clock class
         startClock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openClock();
             }
         });
-
+        // move to store class
         store.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +84,28 @@ public class Menu extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * get user point from logIn DB
+     * get point to add to user from clock
+     */
+    private void getUserPoints() {
+        if(getIntent().getStringExtra("POINTS") != null){
+            newPoints = getIntent().getStringExtra("POINTS");
+
+
+        }else{
+            if(getIntent().getStringExtra("POINTS_TO_ADD") != null){
+                newPoints =  getIntent().getStringExtra("POINTS_TO_ADD");
+            }else {
+                newPoints = "0";
+            }
+        }
+
+
+        userPoints.setText("Points : " +newPoints);
+    }
+
 
     /**
      * Get permission from user to get phone location
@@ -95,9 +127,7 @@ public class Menu extends AppCompatActivity {
         double East = 34.80587469500858; // longitude
         double West = 34.798327688240306; // longitude
 
-        if(North > latit && South < latit && East > longit && West < longit)
-            return true;
-        return false;
+        return North > latit && South < latit && East > longit && West < longit;
 
     }
 
@@ -106,11 +136,16 @@ public class Menu extends AppCompatActivity {
      */
     public void openClock() {
         Intent intent = new Intent(this, Clock.class);
+        intent.putExtra("USER_POINTS", newPoints);
         startActivity(intent);
     }
 
+    /**
+     * Move to Store class with user points
+     */
     public void openStore() {
         Intent intent = new Intent(this, Store.class);
+        intent.putExtra("POINTS", newPoints);
         startActivity(intent);
     }
 }

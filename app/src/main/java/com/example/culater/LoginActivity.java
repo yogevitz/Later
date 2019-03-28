@@ -426,6 +426,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     public void openMenu() {
         Intent intent = new Intent(this, Menu.class);
+        intent.putExtra("POINTS", "2");
         startActivity(intent);
     }
 }
