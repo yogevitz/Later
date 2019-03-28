@@ -130,7 +130,7 @@ public class Clock extends AppCompatActivity {
     public void backToMenu(View v){
         updateInDB();
         Intent intent = new Intent(this, Menu.class);
-        intent.putExtra("POINTS_TO_ADD", (userScoreBeforeAdding+count)+"");
+        intent.putExtra("EMAIL", userEmail);
         startActivity(intent);
     }
 
