@@ -126,16 +126,8 @@ public class DataBaseHelper extends SQLiteOpenHelper implements Serializable {
                     }
             }
 
-            System.out.println(points +"          sdssdsdsddsdsdssdssddssdsdsdsdsdsdsddsdssdsd");
-
             String rawQuery = "UPDATE "+TABEL_NAME+" set "+COL_1_3+ "="+points+" WHERE "+COL_1_1+"="+"'"+email+"'";
             db.execSQL(rawQuery);
-
-
-
-            /*
-            String rawQuery = "UPDATE "+TABEL_NAME+" set "+COL_1_3+ "="+points+" WHERE "+COL_1_1+"="+"'"+email+"'";
-            db.rawQuery(rawQuery, COL_1_1,);*/
         }
         catch(Exception ex)
         {

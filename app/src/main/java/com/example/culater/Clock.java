@@ -7,6 +7,7 @@ import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -19,50 +20,50 @@ import java.util.Properties;
 public class Clock extends AppCompatActivity {
 
     private Chronometer chronometer;
-    private int point;
     private TextView score;
-    private int userScoreBeforeAdding;
-    private int count;
     private DataBaseHelper mDataBaseHelper ;
-    private String userEmail;
 
+    private Button backButton;
+
+    private String userEmail;
+    private int count;
+    private int point;
+
+    // Threads
     private Thread t;
     private Thread tHours;
     private Thread tIdle;
 
-//    private Thread tCoordinates;
-    private Button backButton;
+    private volatile boolean runningThread = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clock);
+
+        // initialize DB
+        mDataBaseHelper = new DataBaseHelper(this);
+
+        // initialize
         backButton = (Button) findViewById(R.id.backButton);
         chronometer = findViewById(R.id.chronometer);
         score = findViewById(R.id.score_TextView);
+
+
         count = 0;
+
+        
         userEmail = getIntent().getStringExtra("EMAIL");
-        mDataBaseHelper = new DataBaseHelper(this);
 
-
-        userScoreBeforeAdding = Integer.parseInt(getIntent().getStringExtra("USER_POINTS"));
 
         startClock();
         startTimer();
         t.start();
         startCheckHours();
         tHours.start();
-//        startCheckCoordinates();
-//        tCoordinates.start();
         startCheckidle();
         tIdle.start();
 
-
-        //Thread t = new Thread(()->startClock());
-        //t.start();
-
-        for(int i=0 ;i <10;i++)
-            System.out.println("Dor");
     }
 
     private void startClock() {
@@ -70,12 +71,19 @@ public class Clock extends AppCompatActivity {
 
     }
 
+    protected void onUserLeaveHint(){
+        mDataBaseHelper.updatePoints(count,userEmail);
+        chronometer.stop();
+        runningThread = false;
+        super.onUserLeaveHint();
+    }
+
     private void startTimer(){
 
         t = new Thread(){
 
             public void run(){
-                while(!isInterrupted()){
+                while(runningThread){
                     try{
                         Thread.sleep(1000);
 
@@ -92,7 +100,6 @@ public class Clock extends AppCompatActivity {
                 }
             }
         };
-
     }
 
     private boolean idle (){
@@ -119,8 +126,6 @@ public class Clock extends AppCompatActivity {
         System.out.println(elapsedMillis);
         point = elapsedMillis;
         score.setText("Point : "+point);
-
-
     }
 
     /**
@@ -128,15 +133,11 @@ public class Clock extends AppCompatActivity {
      * @param v
      */
     public void backToMenu(View v){
-        updateInDB();
         Intent intent = new Intent(this, Menu.class);
         intent.putExtra("EMAIL", userEmail);
         startActivity(intent);
     }
 
-    private void updateInDB() {
-        mDataBaseHelper.updatePoints(count,userEmail);
-    }
 
     /**
      * Separated thread that checking the hours
@@ -146,7 +147,7 @@ public class Clock extends AppCompatActivity {
         tHours = new Thread(){
 
             public void run(){
-                while(!isInterrupted()){
+                while(runningThread){
                     try{
                         Thread.sleep(1000);
 
@@ -154,11 +155,8 @@ public class Clock extends AppCompatActivity {
                             @Override
                             public void run() {
                                 if(!availablehours()){
-                                    backButton.setClickable(true);
-                                    backToMenu(backButton);
+                                    runningThread = false;
                                 }
-                                else
-                                    System.out.println("hours itay");
                             }
                         });
                     } catch (InterruptedException e) {
@@ -177,7 +175,7 @@ public class Clock extends AppCompatActivity {
         tIdle = new Thread(){
 
             public void run(){
-                while(!isInterrupted()){
+                while(runningThread){
                     try{
                         Thread.sleep(1000);
 
@@ -185,11 +183,9 @@ public class Clock extends AppCompatActivity {
                             @Override
                             public void run() {
                                 if(!idle()){
-                                    backButton.setClickable(true);
-                                    backToMenu(backButton);
+                                    runningThread = false;
+
                                 }
-                                else
-                                    System.out.println("idle itay");
                             }
                         });
                     } catch (InterruptedException e) {
@@ -199,6 +195,13 @@ public class Clock extends AppCompatActivity {
             }
         };
 
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_HOME ) {
+            mDataBaseHelper.updatePoints(point,userEmail);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 //    /**
