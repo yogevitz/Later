@@ -57,6 +57,16 @@
         android:layout_height="56dp"
         android:text="TextView"
         tools:layout_editor_absoluteX="112dp"
-        tools:layout_editor_absoluteY="174dp" />
+        tools:layout_editor_absoluteY="174dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/store_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="341dp" />
 
 </android.support.constraint.ConstraintLayout>

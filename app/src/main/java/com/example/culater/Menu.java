@@ -21,6 +21,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 public class Menu extends AppCompatActivity {
 
     private Button startClock;
+    private Button store;
     private Button flag;
     private TextView coordinates_TextView;
     private FusedLocationProviderClient client;
@@ -31,6 +32,7 @@ public class Menu extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         startClock = (Button) findViewById(R.id.getLocation_Btn);
+        store = (Button) findViewById(R.id.store_Btn);
         flag = (Button) findViewById(R.id.inside_Btn);
         coordinates_TextView = (TextView) findViewById(R.id.location_TextView);
 
@@ -59,10 +61,16 @@ public class Menu extends AppCompatActivity {
         });
 
         startClock.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 openClock();
+            }
+        });
+
+        store.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openStore();
             }
         });
     }
@@ -98,6 +106,11 @@ public class Menu extends AppCompatActivity {
      */
     public void openClock() {
         Intent intent = new Intent(this, Clock.class);
+        startActivity(intent);
+    }
+
+    public void openStore() {
+        Intent intent = new Intent(this, Store.class);
         startActivity(intent);
     }
 }
