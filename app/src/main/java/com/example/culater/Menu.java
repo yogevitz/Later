@@ -1,7 +1,9 @@
 package com.example.culater;
+import static com.example.culater.App.CHANNEL_1_ID;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Notification;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -10,15 +12,20 @@ import android.graphics.Color;
 import android.location.Location;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+
+
 
 import java.util.Calendar;
 
@@ -33,10 +40,19 @@ public class Menu extends AppCompatActivity {
     private TextView coordinates_TextView;
     private TextView userPoints;
     private FusedLocationProviderClient client;
-    private DataBaseHelper mDataBaseHelper ;
+    private DataBaseHelper mDataBaseHelper;
+    private Button notification;
+
+
 
     private String newPoints;
     private Activity a = this;
+
+    // notification
+    private NotificationManagerCompat notificationManager;
+    private EditText editTextTitle;
+    private EditText editTextMessage;
+
 //    private Thread tHours;
 
     private String userEmail;
@@ -54,7 +70,12 @@ public class Menu extends AppCompatActivity {
         hourFlag = (Button) findViewById(R.id.hour_Btn);
         coordinates_TextView = (TextView) findViewById(R.id.location_TextView);
         userPoints = (TextView) findViewById(R.id.userPoints_textView);
+        notification = (Button) findViewById(R.id.notification);
         mDataBaseHelper = new DataBaseHelper(this);
+
+        //notification
+        notificationManager = NotificationManagerCompat.from(this);
+
 
         getUserEmail();
         getUserPoints();
@@ -132,6 +153,31 @@ public class Menu extends AppCompatActivity {
                 openStore();
             }
         });
+//        notification.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                sendOnChannel1();
+//            }
+//        });
+    }
+
+    /**
+     * notification
+     * @param v
+     */
+    public void sendOnChannel1(View v) {
+        String title = "title";
+        String message = "message";
+
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.cast_ic_notification_small_icon)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .build();
+
+        notificationManager.notify(1, notification);
     }
 
     /**

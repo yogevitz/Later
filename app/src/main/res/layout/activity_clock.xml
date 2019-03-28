@@ -38,4 +38,10 @@
         android:text="Back"
         android:onClick="backToMenu"/>
 
+    <TextView
+        android:id="@+id/coor_textVIew"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
 </LinearLayout>
