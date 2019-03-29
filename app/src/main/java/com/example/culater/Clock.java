@@ -3,8 +3,9 @@ package com.example.culater;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.os.CountDownTimer;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.SystemClock;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -17,11 +18,14 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 
+import me.itangqi.waveloadingview.WaveLoadingView;
+
 public class Clock extends AppCompatActivity {
 
     private Chronometer chronometer;
     private TextView score;
     private DataBaseHelper mDataBaseHelper ;
+    private WaveLoadingView waveLoadingView;
 
     private Button backButton;
 
@@ -33,6 +37,7 @@ public class Clock extends AppCompatActivity {
     private Thread t;
     private Thread tHours;
     private Thread tIdle;
+    private Thread tAnimation;
 
     private volatile boolean runningThread = true;
 
@@ -40,6 +45,12 @@ public class Clock extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clock);
+
+        waveLoadingView = findViewById(R.id.waveLoadingView);
+        waveLoadingView.setProgressValue(10);
+
+
+
 
         // initialize DB
         mDataBaseHelper = new DataBaseHelper(this);
@@ -49,28 +60,64 @@ public class Clock extends AppCompatActivity {
         chronometer = findViewById(R.id.chronometer);
         score = findViewById(R.id.score_TextView);
 
-
+        ConstraintLayout constraintLayout = findViewById(R.id.layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
+        // count per clock is 0
         count = 0;
+        userEmail = getIntent().getStringExtra("EMAIL"); // getUserMail
 
-        
-        userEmail = getIntent().getStringExtra("EMAIL");
-
-
-        startClock();
-        startTimer();
-        t.start();
-        startCheckHours();
-        tHours.start();
-        startCheckidle();
-        tIdle.start();
+        startClock(); // clock start
+        startTimer(); // new Thread, counter of points
+        t.start(); // run counter
+        startCheckHours(); // check if time between 8 - 20
+        tHours.start(); // run hour Thread
+        startCheckidle(); // Thread of idle ( check if user inside the app)
+        tIdle.start(); // run Thread of Idle
+        Animation();
+        tAnimation.start();
 
     }
 
+    private void Animation(){
+
+        tAnimation = new Thread(){
+
+            public void run(){
+                while(runningThread){
+                    try{
+                        Thread.sleep(1000);
+
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                waveLoadingView.setProgressValue((count*5)%100);
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+    }
+
+
+
+    /**
+     * Start Timer
+     */
     private void startClock() {
         chronometer.start();
-
     }
 
+    /**
+     * When you leave app
+     * Update Points, stop timer, stop all Thread
+     */
     protected void onUserLeaveHint(){
         mDataBaseHelper.updatePoints(count,userEmail);
         chronometer.stop();
@@ -78,6 +125,9 @@ public class Clock extends AppCompatActivity {
         super.onUserLeaveHint();
     }
 
+    /**
+     * Start Thread of points
+     */
     private void startTimer(){
 
         t = new Thread(){
@@ -91,7 +141,7 @@ public class Clock extends AppCompatActivity {
                             @Override
                             public void run() {
                                 count++;
-                                score.setText("Point : "+String.valueOf(count));
+                                score.setText(String.valueOf(count/20) + "\n" +"earned" );
                             }
                         });
                     } catch (InterruptedException e) {
@@ -102,6 +152,10 @@ public class Clock extends AppCompatActivity {
         };
     }
 
+    /**
+     * check if user is inside of app screen
+     * @return true if inside, otherwise false
+     */
     private boolean idle (){
         ActivityManager am =(ActivityManager)this.getSystemService(ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
@@ -125,7 +179,7 @@ public class Clock extends AppCompatActivity {
         int elapsedMillis = (int) (SystemClock.elapsedRealtime() - chronometer.getBase()) / 1000;
         System.out.println(elapsedMillis);
         point = elapsedMillis;
-        score.setText("Point : "+point);
+        score.setText("Point : "+(point/20));
     }
 
     /**
@@ -184,7 +238,6 @@ public class Clock extends AppCompatActivity {
                             public void run() {
                                 if(!idle()){
                                     runningThread = false;
-
                                 }
                             }
                         });
@@ -196,6 +249,13 @@ public class Clock extends AppCompatActivity {
         };
 
     }
+
+    /**
+     * When click on back button in your phone
+     * @param keyCode
+     * @param event
+     * @return true
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_HOME ) {
@@ -203,37 +263,6 @@ public class Clock extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
-//    /**
-//     * Separated thread that checking the Coordinates
-//     */
-//    private void startCheckCoordinates(){
-//
-//        tCoordinates = new Thread(){
-//
-//            public void run(){
-//                while(!isInterrupted()){
-//                    try{
-//                        Thread.sleep(1000);
-//
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                if(!availablehours()){
-//                                    backButton.setClickable(true);
-//                                }
-//                                else
-//                                    System.out.println("itay");
-//                            }
-//                        });
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        };
-//
-//    }
 
     /**
      *  check if hours is available

@@ -4,109 +4,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/b1"
+
+    android:id="@+id/layout"
     tools:context=".Menu">
 
-    <TableLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <Button
+        android:id="@+id/getLocation_Btn"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="184dp"
+        android:layout_marginEnd="156dp"
         android:layout_weight="1"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/timer"
+        android:enabled="false"
+        android:gravity="bottom|right"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/inside_Btn"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/cast_abc_scrubber_control_off_mtrl_alpha" />
-            <Button
-                android:id="@+id/hour_Btn"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/cast_abc_scrubber_control_off_mtrl_alpha" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/location_TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="textview" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/store_Btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="store"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="161dp"
-                tools:layout_editor_absoluteY="341dp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/userPoints_textView"
-                android:layout_width="394dp"
-                android:layout_height="56dp"
-                android:text="textview"
-                android:textAlignment="center"
-                android:textSize="30sp"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="112dp"
-                tools:layout_editor_absoluteY="174dp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/getLocation_Btn"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:enabled="false"
-                android:text="clock" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/notification"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:enabled="true"
-                android:onClick="sendOnChannel1"
-                android:text="notification" />
-        </TableRow>
-
-    </TableLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tmp_TextV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="145dp"
-        android:layout_marginTop="339dp"
-        android:text="TextView"
+        android:id="@+id/userPoints_textView"
+        android:layout_width="252dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="480dp"
+        android:layout_marginEnd="80dp"
+        android:text="textview"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/hour_Btn"
+        android:layout_width="56dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1"
+        android:background="@drawable/time_access"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/inside_Btn"
+        android:layout_width="53dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:background="@drawable/gps"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/store_Btn"
+        android:layout_width="97dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="332dp"
+        android:layout_marginEnd="164dp"
+        android:background="@drawable/shop"
+        android:gravity="top|center"
+        android:text="store"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="77dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="152dp"
+        android:layout_marginEnd="8dp"
+        android:text="start timer"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

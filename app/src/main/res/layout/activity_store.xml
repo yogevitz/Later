@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/b3"
     tools:context=".Store">
 
     <TableLayout
@@ -11,13 +12,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="140dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
 
         <TableRow
             android:layout_width="match_parent"
@@ -34,7 +37,7 @@
                 android:textAlignment="viewEnd"
                 android:textSize="10pt"
                 tools:layout_editor_absoluteX="156dp"
-                tools:layout_editor_absoluteY="72dp"/>
+                tools:layout_editor_absoluteY="72dp" />
 
             <TextView
                 android:id="@+id/points_number"
@@ -53,7 +56,7 @@
         android:id="@+id/tableLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:paddingLeft="30dp"
         android:paddingTop="0dp"
@@ -61,6 +64,7 @@
         app:layout_constrainedHeight="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout2">
 
@@ -78,7 +82,7 @@
                 android:text="Espresso"
                 android:textAlignment="viewStart"
                 tools:layout_editor_absoluteX="37dp"
-                tools:layout_editor_absoluteY="125dp"/>
+                tools:layout_editor_absoluteY="125dp" />
 
             <TextView
                 android:id="@+id/coupon1_price"

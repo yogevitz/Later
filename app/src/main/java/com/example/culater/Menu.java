@@ -1,32 +1,25 @@
 package com.example.culater;
-import static com.example.culater.App.CHANNEL_1_ID;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.Notification;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
-
-
-
 import java.util.Calendar;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -41,20 +34,11 @@ public class Menu extends AppCompatActivity {
     private TextView userPoints;
     private FusedLocationProviderClient client;
     private DataBaseHelper mDataBaseHelper;
-    private Button notification;
-
-
 
     private String newPoints;
     private Activity a = this;
 
     // notification
-    private NotificationManagerCompat notificationManager;
-    private EditText editTextTitle;
-    private EditText editTextMessage;
-
-//    private Thread tHours;
-
     private String userEmail;
 
 
@@ -62,25 +46,23 @@ public class Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
+/*
+        ConstraintLayout constraintLayout = findViewById(R.id.layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
+*/
         // initialize
         startClock = (Button) findViewById(R.id.getLocation_Btn);
         store = (Button) findViewById(R.id.store_Btn);
         flag = (Button) findViewById(R.id.inside_Btn);
         hourFlag = (Button) findViewById(R.id.hour_Btn);
-        coordinates_TextView = (TextView) findViewById(R.id.location_TextView);
         userPoints = (TextView) findViewById(R.id.userPoints_textView);
-        notification = (Button) findViewById(R.id.notification);
         mDataBaseHelper = new DataBaseHelper(this);
-
-        //notification
-        notificationManager = NotificationManagerCompat.from(this);
-
 
         getUserEmail();
         getUserPoints();
-
-
         requestPermission(); // get permission for location
 
         client = LocationServices.getFusedLocationProviderClient(this);
@@ -94,51 +76,28 @@ public class Menu extends AppCompatActivity {
                 if (location != null) {
                     double Latitude = location.getLatitude();
                     double Longitude = location.getLongitude();
-                    coordinates_TextView.setText(Latitude + " " + Longitude);
+                    Resources res = getResources();
+                    Drawable drawable = res.getDrawable(R.drawable.gps_red);
+                    Drawable drawable2 = res.getDrawable(R.drawable.gps);
+                    Drawable drawable3 = res.getDrawable(R.drawable.time_access);
+                    Drawable drawable4 = res.getDrawable(R.drawable.time_access_red);
                     if (availableCoordinates(Latitude, Longitude) && availablehours()) {
-                        flag.setBackgroundColor(Color.GREEN);
-                        hourFlag.setBackgroundColor(Color.GREEN);
+
+
+                        flag.setBackground(drawable);
+
+                        flag.setBackground(drawable2);
+                        hourFlag.setBackground(drawable3);
                         startClock.setEnabled(true);
-//                        startCheckHours();
-//                        tHours.start();
                     }
                     else {
                         showAvalabilityIndication(Latitude, Longitude);
+                        flag.setBackground(drawable);
                     }
                 }
             }
         });
-//        Handler handler = new Handler();
-//        int delay = 10000; //milliseconds
-//        handler.postDelayed(new Runnable(){
-//            public void run(){
-//                requestPermission();
-//
-//                client = LocationServices.getFusedLocationProviderClient(a);
-//                if (ActivityCompat.checkSelfPermission(Menu.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                    return;
-//                }
-//                client.getLastLocation().addOnSuccessListener(Menu.this, new OnSuccessListener<Location>() {
-//                    @Override
-//                    public void onSuccess(Location location) {
-//                        if (location != null) {
-//                            double Latitude = location.getLatitude();
-//                            double Longitude = location.getLongitude();
-//                            System.out.println(Latitude);
-//                            System.out.println(Longitude);
-//                            coordinates_TextView.setText(Latitude + " " + Longitude);
-//                            if (availableCoordinates(Latitude, Longitude)) {
-//                                flag.setBackgroundColor(Color.GREEN);
-//                                startClock.setEnabled(true);
-//                            } else {
-//                                flag.setBackgroundColor(Color.RED);
-//                            }
-//                        }
-//                    }
-//                });
-//                handler.postDelayed(this, delay);
-//            }
-//        }, delay);
+
         // move to clock class
         startClock.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,31 +112,6 @@ public class Menu extends AppCompatActivity {
                 openStore();
             }
         });
-//        notification.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                sendOnChannel1();
-//            }
-//        });
-    }
-
-    /**
-     * notification
-     * @param v
-     */
-    public void sendOnChannel1(View v) {
-        String title = "title";
-        String message = "message";
-
-        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.cast_ic_notification_small_icon)
-                .setContentTitle(title)
-                .setContentText(message)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                .build();
-
-        notificationManager.notify(1, notification);
     }
 
     /**
@@ -228,17 +162,24 @@ public class Menu extends AppCompatActivity {
      * @param Longitude
      */
     private void showAvalabilityIndication(double Latitude, double Longitude){
+        Resources res = getResources();
+        Drawable gps_green = res.getDrawable(R.drawable.gps);
+        Drawable gps_red = res.getDrawable(R.drawable.gps_red);
+
+        Drawable time_green = res.getDrawable(R.drawable.time_access);
+        Drawable time_red = res.getDrawable(R.drawable.time_access_red);
+        //flag.setBackground(drawable);
         if (availableCoordinates(Latitude, Longitude)){
-            flag.setBackgroundColor(Color.GREEN);
-            hourFlag.setBackgroundColor(Color.RED);
+            flag.setBackground(gps_green);
+            hourFlag.setBackground(time_red);
         }
         else if(availablehours()){
-            flag.setBackgroundColor(Color.RED);
-            hourFlag.setBackgroundColor(Color.GREEN);
+            flag.setBackground(gps_red);
+            hourFlag.setBackground(time_green);
         }
         else {
-            flag.setBackgroundColor(Color.RED);
-            hourFlag.setBackgroundColor(Color.RED);
+            flag.setBackground(gps_red);
+            hourFlag.setBackground(time_red);
         }
     }
 
@@ -275,33 +216,4 @@ public class Menu extends AppCompatActivity {
 //        return false;
         return true;
     }
-
-//    /**
-//     * Separated thread that checking the hours
-//     */
-//    private void startCheckHours(){
-//
-//        tHours = new Thread(){
-//
-//            public void run(){
-//                while(availablehours()){
-//                    try{
-//                        Thread.sleep(1000);
-//
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//
-//                            }
-//                        });
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                        startClock.setEnabled(false);
-//
-//                    }
-//                }
-//            }
-//        };
-//
-//    }
 }
