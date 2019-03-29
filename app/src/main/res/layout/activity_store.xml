@@ -35,7 +35,7 @@
                 android:layout_height="match_parent"
                 android:text="Points: "
                 android:textAlignment="viewEnd"
-                android:textSize="10pt"
+                android:textSize="14sp"
                 tools:layout_editor_absoluteX="156dp"
                 tools:layout_editor_absoluteY="72dp" />
 
