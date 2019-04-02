@@ -119,7 +119,7 @@ public class Clock extends AppCompatActivity {
      * Update Points, stop timer, stop all Thread
      */
     protected void onUserLeaveHint(){
-        mDataBaseHelper.updatePoints(count,userEmail);
+        mDataBaseHelper.updatePoints(count/20,userEmail);
         chronometer.stop();
         runningThread = false;
         super.onUserLeaveHint();

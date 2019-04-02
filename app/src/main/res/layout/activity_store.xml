@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
@@ -31,21 +31,23 @@
 
             <TextView
                 android:id="@+id/points_label"
-                android:layout_width="50pt"
-                android:layout_height="match_parent"
+                android:layout_width="164dp"
+                android:layout_height="wrap_content"
                 android:text="Points: "
                 android:textAlignment="viewEnd"
-                android:textSize="14sp"
+                android:textColor="@android:color/white"
+                android:textSize="40sp"
                 tools:layout_editor_absoluteX="156dp"
                 tools:layout_editor_absoluteY="72dp" />
 
             <TextView
                 android:id="@+id/points_number"
-                android:layout_width="35pt"
-                android:layout_height="24dp"
+                android:layout_width="84dp"
+                android:layout_height="wrap_content"
                 android:text="12"
                 android:textAlignment="viewStart"
-                android:textSize="10pt"
+                android:textColor="@android:color/white"
+                android:textSize="40sp"
                 tools:layout_editor_absoluteX="209dp"
                 tools:layout_editor_absoluteY="68dp" />
         </TableRow>
@@ -86,11 +88,12 @@
 
             <TextView
                 android:id="@+id/coupon1_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="56dp"
+                android:layout_height="55dp"
                 android:gravity="center"
                 android:text="5"
-                android:textSize="18sp"
+                android:textSize="40sp"
+                android:textStyle="bold"
                 tools:text="5" />
         </TableRow>
 
@@ -110,11 +113,12 @@
 
             <TextView
                 android:id="@+id/coupon2_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="59dp"
+                android:layout_height="55dp"
                 android:gravity="center"
                 android:text="5"
-                android:textSize="18sp"
+                android:textSize="40sp"
+                android:textStyle="bold"
                 tools:text="7" />
 
         </TableRow>
@@ -135,11 +139,12 @@
 
             <TextView
                 android:id="@+id/coupon3_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="52dp"
+                android:layout_height="55dp"
                 android:gravity="center"
                 android:text="5"
-                android:textSize="18sp"
+                android:textSize="40sp"
+                android:textStyle="bold"
                 tools:text="10" />
 
         </TableRow>
@@ -160,11 +165,12 @@
 
             <TextView
                 android:id="@+id/coupon4_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="59dp"
+                android:layout_height="55dp"
                 android:gravity="center"
                 android:text="5"
-                android:textSize="18sp"
+                android:textSize="40sp"
+                android:textStyle="bold"
                 tools:text="15" />
 
         </TableRow>
@@ -185,11 +191,12 @@
 
             <TextView
                 android:id="@+id/coupon5_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="41dp"
+                android:layout_height="55dp"
                 android:gravity="center"
                 android:text="5"
-                android:textSize="18sp"
+                android:textSize="40sp"
+                android:textStyle="bold"
                 tools:text="17" />
 
         </TableRow>
@@ -210,11 +217,12 @@
 
             <TextView
                 android:id="@+id/coupon6_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="54dp"
+                android:layout_height="55dp"
                 android:gravity="center"
                 android:text="5"
-                android:textSize="18sp"
+                android:textSize="40sp"
+                android:textStyle="bold"
                 tools:text="22" />
 
         </TableRow>

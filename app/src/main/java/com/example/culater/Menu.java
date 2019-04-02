@@ -84,7 +84,7 @@ public class Menu extends AppCompatActivity {
                     if (availableCoordinates(Latitude, Longitude) && availablehours()) {
 
 
-                        flag.setBackground(drawable);
+                        //flag.setBackground(drawable);
 
                         flag.setBackground(drawable2);
                         hourFlag.setBackground(drawable3);
@@ -92,7 +92,8 @@ public class Menu extends AppCompatActivity {
                     }
                     else {
                         showAvalabilityIndication(Latitude, Longitude);
-                        flag.setBackground(drawable);
+                        flag.setBackground(drawable2);
+                        startClock.setEnabled(true);
                     }
                 }
             }
@@ -174,11 +175,11 @@ public class Menu extends AppCompatActivity {
             hourFlag.setBackground(time_red);
         }
         else if(availablehours()){
-            flag.setBackground(gps_red);
+            flag.setBackground(gps_green);
             hourFlag.setBackground(time_green);
         }
         else {
-            flag.setBackground(gps_red);
+            flag.setBackground(gps_green);
             hourFlag.setBackground(time_red);
         }
     }

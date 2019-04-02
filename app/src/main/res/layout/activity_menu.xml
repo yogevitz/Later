@@ -72,12 +72,12 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="77dp"
+        android:layout_width="111dp"
         android:layout_height="23dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="160dp"
         android:layout_marginEnd="8dp"
-        android:text="start timer"
+        android:text="START TIMER"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
